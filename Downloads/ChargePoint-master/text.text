@@ -1,0 +1,12 @@
+      "package": "com.point_charge.firebaseapp",
+      "googleServicesFile": "./google-services.json"
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ],
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth",

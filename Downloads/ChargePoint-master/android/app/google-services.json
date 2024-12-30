@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "464825721744",
+    "project_id": "fir-4e187",
+    "storage_bucket": "fir-4e187.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:464825721744:android:b95bd44c56ae74426e8915",
+        "android_client_info": {
+          "package_name": "com.pointCharge.firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "464825721744-foad8k2t9r7ah0f5f1lv9bfpd54d7cu1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pointCharge.firebase",
+            "certificate_hash": "d997e749130cecd72e4682d24a05f1f4876266cf"
+          }
+        },
+        {
+          "client_id": "464825721744-tg94tt8uufs9hnck1dnvn2jom8194gvj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pointCharge.firebase",
+            "certificate_hash": "7be8e9f77ea5d303bc10df40c052f18cc68ca99e"
+          }
+        },
+        {
+          "client_id": "464825721744-s4alrfsvrvhm380je76ts79uitqjicla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5nQIpDw3ODjDbGOdGjOIEzW3o3mF5Rlc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "464825721744-s4alrfsvrvhm380je76ts79uitqjicla.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
