@@ -6,11 +6,13 @@ import {
   Text,
   Modal,
   TouchableOpacity,
+  Platform, //to use navigator 
 } from "react-native";
 import Mapbox, { Camera, LocationPuck, MapView } from "@rnmapbox/maps";
 import { ContextUser } from "../../context/ContextProvider";
 import * as Location from "expo-location";
 import { MaterialIcons } from "@expo/vector-icons";
+import * as Linking from "expo-linking"; // to linked app with navigator 
 
 Mapbox.setAccessToken(
   "pk.eyJ1IjoibWFobW91ZGZhdGh5MTk5NyIsImEiOiJjbHo5eXJ3ZTcwaTFwMmpzYWVtdTdpdXZpIn0._dZq4rTZ7u7BTZ4uXryATw"
@@ -83,6 +85,15 @@ const Map = () => {
         setErrorMsg("Could not get current location");
       }
     }
+  };
+
+  // function to navigate to charge point 
+  const handleNavigate = (destinationLat, destinationLon) => {
+    const url = Platform.select({
+      ios: `maps:0,0?q=${destinationLat},${destinationLon}`,
+      android: `google.navigation:q=${destinationLat},${destinationLon}`,
+    });
+    Linking.openURL(url);
   };
 
   return (
@@ -175,7 +186,7 @@ const Map = () => {
             <Text style={styles.modalText}>
               Price:{" "}
               <Text style={styles.modalSubText}>
-                {model_charge?.data?.price}
+                {model_charge?.data?.price||"Not specified"}
               </Text>
             </Text>
             <Text style={styles.modalText}>
@@ -191,15 +202,36 @@ const Map = () => {
             <Text style={styles.modalText}>
               Country:{" "}
               <Text style={styles.modalSubText}>
-                {model_charge?.data?.country}
+                {model_charge?.data?.country||"Not specified"}
               </Text>
             </Text>
             <Text style={styles.modalText}>
               Status:{" "}
               <Text style={styles.modalSubText}>
-                {model_charge?.data?.status}
+                {model_charge?.data?.status||"Not specified"}
               </Text>
             </Text>
+            <Text style={styles.modalText}>
+              Type of Charger:{" "}
+              <Text style={styles.modalSubText}>
+                {model_charge?.data?.TypeOfCharger||"Not specified"}
+              </Text>
+            </Text>
+          
+            
+
+            {}
+            <TouchableOpacity
+              onPress={() =>
+                handleNavigate(
+                  model_charge?.data?.lat,
+                  model_charge?.data?.long
+                )
+              }
+              style={styles.navigateButton}
+            >
+              <Text style={styles.navigateButtonText}>Navigate</Text>
+            </TouchableOpacity>
           </View>
         </Modal>
       )}
@@ -267,6 +299,18 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'white',
     textAlign: 'center',
+  },
+  navigateButton: {
+    backgroundColor: "#0066CC",
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  navigateButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
   },
 });
 

@@ -17,6 +17,7 @@ import { ContextUser } from "../../context/ContextProvider";
 const ChargePoints = ({ onClose, defualtValue, edit }) => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [timeFormat, setTimeFormat] = useState("AM"); //Add time status
 
   const { user, handlerChargePoints } = useContext(ContextUser);
 
@@ -29,7 +30,7 @@ const ChargePoints = ({ onClose, defualtValue, edit }) => {
     if (defualtValue) {
       setData((prev) => ({ ...prev, ...defualtValue.data }));
     }
-  }, []);
+  }, [defualtValue]);
 
   const handlerChanged = (text, name) => {
     setData({ ...data, [name]: text });
@@ -86,14 +87,14 @@ const ChargePoints = ({ onClose, defualtValue, edit }) => {
             style={styles.input}
           />
           <TextInput
-            label="Lat"
+            label="Latitude"
             keyboardType="number-pad"
             value={data?.lat}
             onChangeText={(text) => handlerChanged(text, "lat")}
             style={styles.input}
           />
           <TextInput
-            label="Long"
+            label="Longitude"
             keyboardType="number-pad"
             value={data?.long}
             onChangeText={(text) => handlerChanged(text, "long")}
@@ -112,6 +113,13 @@ const ChargePoints = ({ onClose, defualtValue, edit }) => {
             style={styles.input}
           />
           <TextInput
+            label="Type of charger"
+            keyboardType="number-pad"
+            value={data?.availableTime}
+            onChangeText={(text) => handlerChanged(text, "TypeOfCharger")}
+            style={styles.input}
+          />
+          <TextInput
             label="Price"
             keyboardType="number-pad"
             value={data?.price}
@@ -119,9 +127,9 @@ const ChargePoints = ({ onClose, defualtValue, edit }) => {
             style={styles.input}
           />
           <TextInput
-            label="Speed"
+            label="Speed KW/H"
             value={data?.speed}
-            onChangeText={(text) => handlerChanged(text, "speed")}
+            onChangeText={(text) => handlerChanged(text, "speed KW/H")}
             style={styles.input}
           />
           <TextInput
@@ -138,13 +146,24 @@ const ChargePoints = ({ onClose, defualtValue, edit }) => {
             onChangeText={(text) => handlerChanged(text, "maxChargeTime")}
             style={styles.input}
           />
-          <TextInput
-            label="Available Time"
-            keyboardType="number-pad"
-            value={data?.availableTime}
-            onChangeText={(text) => handlerChanged(text, "availableTime")}
-            style={styles.input}
-          />
+        
+          <View style={styles.timeContainer}>
+            <TextInput
+              label="Available Time"
+              keyboardType="number-pad"
+              value={data?.availableTime}
+              onChangeText={(text) => handlerChanged(text, "availableTime")}
+              style={[styles.input, { flex: 1 }]}
+            />
+            <Button 
+              mode="outlined" 
+              onPress={() => setTimeFormat((prev) => (prev === "AM" ? "PM" : "AM"))}
+              style={styles.timeButton}
+            >
+              {timeFormat}
+            </Button>
+          </View>
+
           <Button
             mode="contained"
             style={{ backgroundColor: COLORS.ACCENT }}
@@ -190,6 +209,14 @@ const styles = StyleSheet.create({
     color: COLORS.BLACK,
     borderWidth: 1,
     borderColor: "#eee",
+  },
+  timeContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  timeButton: {
+    marginTop: 10,
   },
 });
 
